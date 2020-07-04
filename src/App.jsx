@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import './App.module.scss';
 
 import NavBar from "./components/NavBar";
-import CardList from "./components/CardList";
-import beers from "./data/beers"
+import Main from "./components/Main";
+import beers from "./data/beers";
 
 export default class App extends Component {
-  state = {
-    searchTerm: ""
-  }
-
   render() {
     return (
       <main>
         <NavBar />
-        <CardList beers={beers} />
+        <Main beers={beers}/>
       </main>
     )
   }
