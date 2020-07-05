@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import FilterItem from "../FilterItem";
 
 export default class FiltersList extends Component {
+    getFilterJsx = (filter, index) => (
+        <div key={index}>
+            <FilterItem filter={filter} handleChecked={this.props.handleChecked} />
+        </div>
+    );
+
     render() { 
         return (
-            <div>
-                {this.props.filters.map((checkbox, index) => {
-                    return <FilterItem key={index} label={checkbox.label} value={checkbox.value} handleChecked={this.props.handleChecked} />
-                })}
-            </div>
+            <section>
+                {this.props.filters.map(this.getFilterJsx)}
+            </section>
         );
     }
 }
