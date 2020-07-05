@@ -10,10 +10,19 @@ export default class CardList extends Component {
         .map(beer => <Card key={beer.id} beer={beer} />)
     }
 
+    filterBeers = () => {
+        return this.props.beers
+        .filter((beer => 
+            this.props.checkedValue === "abv" && beer.abv > 6 || 
+            this.props.checkedValue === "classic" && beer.first_brewed.slice(-4) < 2010 || 
+            this.props.checkedValue == "acidic" && beer.ph < 4))
+        .map(beer => <Card key={beer.id} beer={beer} />)
+    }
+
     render() { 
         return ( 
             <section className={styles.cardList}>
-                {this.getBeers()}
+                {this.props.isChecked ? this.filterBeers() : this.getBeers()}
             </section>
         );
     }
