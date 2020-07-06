@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterItem from "../FilterItem";
+import styles from "./FiltersList.module.scss"
 
 export default class FiltersList extends Component {
     getFilterJsx = (filter, index) => (
@@ -10,7 +11,8 @@ export default class FiltersList extends Component {
 
     render() { 
         return (
-            <section>
+            <section className={styles.filtersList}>
+                <h4>Filter by:</h4>
                 {this.props.filters.map(this.getFilterJsx)}
             </section>
         );
