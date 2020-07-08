@@ -12,10 +12,25 @@ export default class CardList extends Component {
 
     filterBeers = (checked) => {
         return this.props.beers
-        .filter((beer => checked.includes("abv") && beer.abv > 6 || 
-        checked.includes("classic") && beer.first_brewed.slice(-4) < 2010 || 
-        checked.includes("acidic") && beer.ph < 4))
-        .map(beer => <Card key={beer.id} beer={beer} />)
+        .filter(beer => {
+            if (checked.includes("abv") ) {
+                return beer.abv > 6;
+            } else {
+                return true;
+            }
+        }).filter(beer => {
+            if (checked.includes("classic") ) {
+                return beer.first_brewed.slice(-4) < 2010;
+            } else {
+                return true;
+            }
+        }).filter(beer => {
+            if (checked.includes("acidic")) {
+                return beer.ph < 4;
+            } else {
+                return true;
+            }
+        }).map(beer => <Card key={beer.id} beer={beer} />)
     }
 
     render() { 
