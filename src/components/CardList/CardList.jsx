@@ -4,42 +4,22 @@ import styles from "./CardList.module.scss"
 
 export default class CardList extends Component {
     getBeers = () => {
+        const checked = this.props.filters.filter(filter => filter.isChecked)
+        .map(filter => filter.value);
+        const keep = true;
+
         return this.props.beers
-        .filter(beer => beer.name.toLowerCase()
-        .includes(this.props.searchTerm.toLowerCase()))
+        .filter(beer => beer.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
+        .filter(beer => checked.includes("abv") ? beer.abv > 6 : keep)
+        .filter(beer => checked.includes("classic") ? beer.first_brewed.slice(-4) < 2010 : keep)
+        .filter(beer => checked.includes("acidic") ? beer.ph < 4 : keep)
         .map(beer => <Card key={beer.id} beer={beer} />)
     }
 
-    filterBeers = (checked) => {
-        return this.props.beers
-        .filter(beer => {
-            if (checked.includes("abv") ) {
-                return beer.abv > 6;
-            } else {
-                return true;
-            }
-        }).filter(beer => {
-            if (checked.includes("classic") ) {
-                return beer.first_brewed.slice(-4) < 2010;
-            } else {
-                return true;
-            }
-        }).filter(beer => {
-            if (checked.includes("acidic")) {
-                return beer.ph < 4;
-            } else {
-                return true;
-            }
-        }).map(beer => <Card key={beer.id} beer={beer} />)
-    }
-
     render() { 
-        const checked = this.props.filters.filter(filter => filter.isChecked)
-        .map(filter => filter.value);
-
         return ( 
             <section className={styles.cardList}>
-                {checked.length < 1 ? this.getBeers() : this.filterBeers(checked)}
+                {this.getBeers()}
             </section>
         );
     }
