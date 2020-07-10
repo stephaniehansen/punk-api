@@ -3,10 +3,10 @@ import './App.module.scss';
 
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
-import beers from "./data/beers";
 
 export default class App extends Component {
   state = {
+    beers: [],
     searchTerm: "",
     filters: [
       { value: "abv",
@@ -24,21 +24,34 @@ export default class App extends Component {
     ]
   }
 
+  fetchBeers = () => {
+    fetch("https://api.punkapi.com/v2/beers")
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        beers: data
+      })
+    })
+    .catch(error => console.log(error));
+  }
+
   handleChange = (e) => this.setState({searchTerm: e.target.value})
   handleChecked = (filter, isChecked) => {
     const updateChecked = this.state.filters.map(item => {
-      if(item.value === filter.value){
-        item.isChecked = isChecked;
-      } return item;
-    })
+      if (item.value === filter.value) item.isChecked = isChecked;
+      return item; })
     this.setState({filters: updateChecked})
   } 
+
+  componentDidMount() {
+    this.fetchBeers();
+  }
 
   render() {
     return (
       <main>
         <NavBar filters={this.state.filters} handleChange={this.handleChange} handleChecked={this.handleChecked}/>
-        <Main beers={beers} searchTerm={this.state.searchTerm} filters={this.state.filters} />
+        <Main beers={this.state.beers} searchTerm={this.state.searchTerm} filters={this.state.filters} />
       </main>
     )
   }
