@@ -27,21 +27,17 @@ export default class App extends Component {
   fetchBeers = () => {
     fetch("https://api.punkapi.com/v2/beers")
     .then(response => response.json())
-    .then(data => {
-      this.setState({
-        beers: data
-      })
-    })
+    .then(data => this.setState({ beers: data }))
     .catch(error => console.log(error));
   }
 
   handleChange = (e) => this.setState({searchTerm: e.target.value})
   handleChecked = (filter, isChecked) => {
-    const updateChecked = this.state.filters.map(condition => {
-      if (condition.value === filter.value) condition.isChecked = isChecked;
-      return condition; })
-    this.setState({filters: updateChecked})
-  } 
+    const filters = [...this.state.filters];
+    const index = this.state.filters.findIndex(condition => (condition.value === filter.value));
+    filters[index].isChecked = isChecked;
+    this.setState({ filters })
+  }
 
   componentDidMount() {
     this.fetchBeers();
