@@ -37,9 +37,9 @@ export default class App extends Component {
 
   handleChange = (e) => this.setState({searchTerm: e.target.value})
   handleChecked = (filter, isChecked) => {
-    const updateChecked = this.state.filters.map(item => {
-      if (item.value === filter.value) item.isChecked = isChecked;
-      return item; })
+    const updateChecked = this.state.filters.map(condition => {
+      if (condition.value === filter.value) condition.isChecked = isChecked;
+      return condition; })
     this.setState({filters: updateChecked})
   } 
 
