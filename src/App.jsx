@@ -31,7 +31,7 @@ export default class App extends Component {
     .catch(error => console.log(error));
   }
 
-  handleChange = (e) => this.setState({searchTerm: e.target.value})
+  handleChange = (e) => this.setState({ searchTerm: e.target.value })
   handleChecked = (filter, isChecked) => {
     const filters = [...this.state.filters];
     const index = this.state.filters.findIndex(condition => (condition.value === filter.value));
@@ -46,7 +46,7 @@ export default class App extends Component {
   render() {
     return (
       <main>
-        <NavBar filters={this.state.filters} handleChange={this.handleChange} handleChecked={this.handleChecked}/>
+        <NavBar filters={this.state.filters} handleChange={this.handleChange} handleChecked={this.handleChecked} />
         <Main beers={this.state.beers} searchTerm={this.state.searchTerm} filters={this.state.filters} />
       </main>
     )
