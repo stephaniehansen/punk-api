@@ -8,11 +8,17 @@ export default class CardList extends Component {
         const checked = filters.filter(condition => condition.isChecked)
         .map(condition => condition.value);
 
-        return beers.filter(beer => beer.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        const results = beers.filter(beer => beer.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter(beer => checked.includes("abv") ? beer.abv > 6 : beer)
         .filter(beer => checked.includes("classic") ? beer.first_brewed.slice(-4) < 2010 : beer)
         .filter(beer => checked.includes("acidic") ? beer.ph < 4 : beer)
         .map(beer => <Card key={beer.id} beer={beer} />)
+
+        return results.length > 0 ? results : this.displayMsg();
+    }
+
+    displayMsg = () => {
+        return <span className={styles.displayMsg}>No results to display...</span>
     }
 
     render() { 
