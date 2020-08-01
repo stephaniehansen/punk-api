@@ -1,7 +1,18 @@
 .sideNav {
     display: flex;
     flex-direction: column;
-    margin-right: 30px;
     position: fixed;
-    width: 230px;
+    width: 280px;
+    height: 100vh;
+    padding: 2vw 3vw 0 2vw;
+    background-color: #1b1b1b;
+    color: #f0f0f0;;
+
+    .logo
+    {
+        h1 {
+            font-size: 34px;
+            letter-spacing: .2px;
+        }
+    }
 }
