@@ -5,4 +5,11 @@
     left: 280px;
     position: absolute;
     margin: 20px 2vw;
+
+    .displayMsg {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: .2px;
+        font-size: 18px;
+    }
 }
