@@ -12,4 +12,15 @@
         letter-spacing: .2px;
         font-size: 18px;
     }
+
+    @media all and (max-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px 4vw;
+    }
 }
