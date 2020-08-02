@@ -12,7 +12,7 @@ export default class FiltersList extends Component {
     render() { 
         return (
             <section className={styles.filtersList}>
-                <h4>Filter by:</h4>
+                <h4>Filters</h4>
                 {this.props.filters.map(this.getFilterJsx)}
             </section>
         );
